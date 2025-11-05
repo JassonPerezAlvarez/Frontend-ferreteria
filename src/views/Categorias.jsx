@@ -1,3 +1,7 @@
+import ModalRegistroCategoria from '../components/categorias/ModalRegistroCategoria';
+import TablaCategorias from '../components/categorias/TablaCategorias';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const Categorias = () => {
 return(
