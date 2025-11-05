@@ -1,14 +1,41 @@
 import { useState } from "react" ;
 import './App.css';
 
-const App = () => {
-return(
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+//Importar componente Encabezado.
+import Encabezado from "./components/navegacion/Encabezado";
 
-  <>
- 
-  <h1>Ferreteria</h1>
-  </>
-);
-};
+//Importar las vistas.
+import Login from "./views/Login";
+import Inicio from "./views/Inicio";
+import Empleados from "./views/Empleados";
+import Categorias from "./views/Categorias";
+import Clientes from "./views/Clientes";
+import Productos from "./views/Productos";
+import Usuarios from "./views/Usuarios";
+import Ventas from "./views/Ventas";
+import Compras from "./views/Compras";
+import Catalogo from "./views/Catalogo";
+
+//Importar archivo de estilos.
+import "./App.css";
+
+const App = () =>{
+  return (
+    <Router>
+      <Encabezado />
+      <main className="margen-superior-main">
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/categorias" element={<Categorias />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
+        </Routes>
+      </main>
+    </Router>
+  );
+}
 
 export default App;
