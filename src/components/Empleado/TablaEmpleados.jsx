@@ -1,10 +1,10 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { Table, Spinner, Button } from "react-bootstrap";
 import BotonOrden from "../ordenamiento/BotonOrden";
 import Paginacion from "../ordenamiento/Paginacion";
 
-const TablaClientes = ({
-    clientes,
+const TablaEmpleados = ({
+    empleados,
     cargando,
     abrirModalEdicion,
     abrirModalEliminacion,
@@ -13,7 +13,7 @@ const TablaClientes = ({
     paginaActual,
     establecerPaginaActual
 }) => {
-    const [orden, setOrden] = useState({ campo: "id_cliente", direccion: "asc" });
+    const [orden, setOrden] = useState({ campo: "id_empleado", direccion: "asc" });
 
     const manejarOrden = (campo) => {
         setOrden((prev) => ({
@@ -22,7 +22,7 @@ const TablaClientes = ({
         }));
     };
 
-    const clientesOrdenados = [...clientes].sort((a, b) => {
+    const empleadosOrdenados = [...empleados].sort((a, b) => {
         const valorA = a[orden.campo] ?? "";
         const valorB = b[orden.campo] ?? "";
         if (typeof valorA === "number" && typeof valorB === "number") {
@@ -44,10 +44,10 @@ const TablaClientes = ({
 
     return (
         <>
-            <Table striped bordered hover className="table-dark mt-3">
-                <thead className="table-dark">
+            <Table striped bordered hover className="mt-3">
+                <thead>
                     <tr>
-                        <BotonOrden campo="id_cliente" orden={orden} manejarOrden={manejarOrden}>
+                        <BotonOrden campo="id_empleado" orden={orden} manejarOrden={manejarOrden}>
                             ID
                         </BotonOrden>
                         <BotonOrden campo="primer_nombre" orden={orden} manejarOrden={manejarOrden}>
@@ -59,37 +59,37 @@ const TablaClientes = ({
                         <BotonOrden campo="celular" orden={orden} manejarOrden={manejarOrden}>
                             Celular
                         </BotonOrden>
-                        <BotonOrden campo="direccion" orden={orden} manejarOrden={manejarOrden}>
-                            Dirección
+                        <BotonOrden campo="cargo" orden={orden} manejarOrden={manejarOrden}>
+                            Cargo
                         </BotonOrden>
-                        <BotonOrden campo="cedula" orden={orden} manejarOrden={manejarOrden}>
-                            Cédula
+                        <BotonOrden campo="fecha_contratacion" orden={orden} manejarOrden={manejarOrden}>
+                            Fecha Contratación
                         </BotonOrden>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {clientesOrdenados.map((cli) => (
-                        <tr key={cli.id_cliente}>
-                            <td>{cli.id_cliente}</td>
-                            <td>{cli.primer_nombre} {cli.segundo_nombre || ''}</td>
-                            <td>{cli.primer_apellido} {cli.segundo_apellido || ''}</td>
-                            <td>{cli.celular || '-'}</td>
-                            <td>{cli.direccion || '-'}</td>
-                            <td>{cli.cedula || '-'}</td>
+                    {empleadosOrdenados.map((emp) => (
+                        <tr key={emp.id_empleado}>
+                            <td>{emp.id_empleado}</td>
+                            <td>{emp.primer_nombre} {emp.segundo_nombre || ''}</td>
+                            <td>{emp.primer_apellido} {emp.segundo_apellido || ''}</td>
+                            <td>{emp.celular || '-'}</td>
+                            <td>{emp.cargo || '-'}</td>
+                            <td>{new Date(emp.fecha_contratacion).toLocaleString('es-NI', { timeZone: 'America/Managua', dateStyle: 'short' })}</td>
                             <td>
                                 <Button
                                     variant="outline-warning"
                                     size="sm"
                                     className="me-2"
-                                    onClick={() => abrirModalEdicion(cli)}
+                                    onClick={() => abrirModalEdicion(emp)}
                                 >
                                     <i className="bi bi-pencil"></i>
                                 </Button>
                                 <Button
                                     variant="outline-danger"
                                     size="sm"
-                                    onClick={() => abrirModalEliminacion(cli)}
+                                    onClick={() => abrirModalEliminacion(emp)}
                                 >
                                     <i className="bi bi-trash"></i>
                                 </Button>
@@ -109,4 +109,4 @@ const TablaClientes = ({
     );
 };
 
-export default TablaClientes;
+export default TablaEmpleados;

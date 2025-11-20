@@ -1,11 +1,10 @@
-
 const Inicio = () => {
-return(
-    <>
-    <h2>pagina de inicio</h2>
-    </>
-);
 
-}
+  return (
+    <>
+      <h1>Bienvenido</h1>
+    </>
+  );
+};
 
 export default Inicio;
